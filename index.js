@@ -13,30 +13,55 @@ this.newOne= new Book(name,author,pages,read)
 myLibrary.push(newOne)
 }
 
+
+
+
 function loop() {
 
     if (myLibrary.length > 0) {
       const bookList = document.getElementById('bookList')
-      bookList.innerHTML = ''
+      bookList.innerHTML = '' //This ensures that at next go, we do not get multiple headers.
       const tableHead = document.createElement('tr')
 
        tableHead.innerHTML=`<th>Title</th> 
        <th>Author</th> 
        <th>Pages</th> 
-       <th>Read</th>`
+       <th>Read</th>
+       <th>Remove</th>`
 
-       bookList.appendChild(tableHead)
+
+
+      bookList.appendChild(tableHead)
      
       for (let i = 0; i < myLibrary.length; i++) {
         const tableRows = document.createElement('tr')
+
+
         tableRows.innerHTML = ` 
         <td>${myLibrary[i].name}</td>
         <td>${myLibrary[i].author}</td>
         <td>${myLibrary[i].pages}</td>
-        <td>${myLibrary[i].read}</td>`;
+        <td>${myLibrary[i].read}</td>
+        <td><button data-index='${i}'>Remove</button></td>`;
+
+        const removeButton = tableRows.querySelector('button')
+       
 
         bookList.appendChild(tableRows)
-        console.log('looping')
+
+        function removeTd(){
+          const index = this.dataset.index;
+  myLibrary.splice(index, 1); // Remove the corresponding item from the array
+  this.parentNode.parentNode.remove(); // Remove the corresponding row from the table
+  loop();
+        
+        } 
+
+
+
+        removeButton.addEventListener('click', removeTd)
+
+        
     }
     }
   } 
