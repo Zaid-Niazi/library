@@ -28,9 +28,6 @@ function loop() {
        <th>Pages</th> 
        <th>Read</th>
        <th>Remove</th>`
-
-
-
       bookList.appendChild(tableHead)
      
       for (let i = 0; i < myLibrary.length; i++) {
@@ -41,11 +38,16 @@ function loop() {
         <td>${myLibrary[i].name}</td>
         <td>${myLibrary[i].author}</td>
         <td>${myLibrary[i].pages}</td>
-        <td>${myLibrary[i].read}</td>
+        <td class='read-td'><button>${myLibrary[i].read}</button></td>
         <td><button data-index='${i}'>Remove</button></td>`;
 
-        const removeButton = tableRows.querySelector('button')
-       
+        const removeButton = tableRows.querySelector('[data-index]')
+        removeButton.addEventListener('click', removeTd)
+        const readButton = tableRows.querySelector('.read-td button')
+        readButton.addEventListener('click', function () {
+          myLibrary[i].read = true;
+          loop();
+        });
 
         bookList.appendChild(tableRows)
 
@@ -56,11 +58,6 @@ function loop() {
   loop();
         
         } 
-
-
-
-        removeButton.addEventListener('click', removeTd)
-
         
     }
     }
