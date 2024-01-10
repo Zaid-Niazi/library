@@ -1,4 +1,4 @@
 Simple Library Table 
 
 <br>
-View here - https://vazcon.github.io/library/
+View here - https://zaid-niazi.github.io/library/
